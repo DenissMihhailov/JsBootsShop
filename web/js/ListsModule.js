@@ -35,24 +35,28 @@ class ListsModule{
                 <div class="col-3 fadeInDown">
                 <div id='printBuyMenu${sneaker[i].id}' class="product-wrap">
                 <div class="product-image">
-                  <a href="">
+                  <a>
                     <img src="${sneaker[i].imgLink}">
                     <div class="shadow"></div>
                   </a>
-                  <a class="detail-link" href="" title="More"></a>
+                  <a id="id${sneaker[i].id}" class="detail-link" title="More"></a>
                 </div>
                 <div class="product-list">
-                  <h3>${sneaker[i].sneakerFirm} ${sneaker[i].sneakerModel}</h3>
+                  <h3 id="nameSneak">${sneaker[i].sneakerFirm} ${sneaker[i].sneakerModel}</h3>
                   <div class="price">${sneaker[i].sneakerPrice}€</div>
+
                 </div>
               </div>
               </div>
             `         
             );
-            document.getElementById('printBuyMenu'+sneaker[i].id).onclick=function(){
-                        listsModule.getSneakerExactly(2);
-                    }
         }
+            $(document).on('click', 'a[id^="id"]', function(e) {
+            e.preventDefault();
+            var id = this.id;
+            id = id.replace(/[a-zа-яё]/gi, '');
+            listsModule.getSneakerExactly(id);
+        });   
     }
     getSneakerExactly(sneakerId){
         let promiseSneaker = fetch('getSneakers',{
@@ -87,17 +91,18 @@ class ListsModule{
                 <div class="container I fadeInDown">
                 <div class="wrapperI">
                   <div class="productI-img">
-                    <img src="${sneaker[sneakerId].imgLink}" height="420" width="420">
+                    <img src="${sneaker[sneakerId-1].imgLink}" height="420" width="420">
                   </div>
                   <div class="productI-info fadeIn second">
                     <div class="productI-text">
-                      <h1>${sneaker[sneakerId].sneakerFirm} ${sneaker[sneakerId].sneakerModel}</h1>
-                      <p>${sneaker[sneakerId].sneakerDescription}<br>&nbsp</p>
-                      <p class="moreInf"><strong>Size: ${sneaker[sneakerId].sneakerSize}</strong></p>
-                      <p class="moreInf"><strong>Quantity: ${sneaker[sneakerId].sneakerQuantity}</strong></p>
+                      <i id="back" class="fa-solid fa-xmark"></i>
+                      <h1>${sneaker[sneakerId-1].sneakerFirm} ${sneaker[sneakerId-1].sneakerModel}</h1>
+                      <p>${sneaker[sneakerId-1].sneakerDescription}<br>&nbsp</p>
+                      <p class="moreInf"><strong>Size: ${sneaker[sneakerId-1].sneakerSize}</strong></p>
+                      <p class="moreInf"><strong>Quantity: ${sneaker[sneakerId-1].sneakerQuantity}</strong></p>
                     </div>
                     <div class="productI-price-btn fadeIn third">
-                      <p>${sneaker[sneakerId].sneakerPrice}€</p>
+                      <p>${sneaker[sneakerId-1].sneakerPrice}€</p>
                       <button type="button">buy now</button>
                     </div>
                   </div>
@@ -105,6 +110,9 @@ class ListsModule{
               </div>
             `         
             );
+            document.getElementById('back').onclick=function(){
+            listsModule.getSneakersList();
+        }
         }
     getBuyersList(){
         let promiseSneaker = fetch('getBuyers',{

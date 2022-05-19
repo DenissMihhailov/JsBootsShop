@@ -122,7 +122,9 @@ private PasswordProtected pp = new PasswordProtected();
                 job.add("auth",true);
                 job.add("token", session.getId());
                 job.add("user", ujb.getJsonUser(authUser));
+                job.add("userId", authUser.getId());
                 job.add("role", new RoleJsonBuilder().getJsonRole(userRolesFacade.getRoleUser(authUser)));
+                //job.add("idUser", new RoleJsonBuilder().getJsonRole(authUser.getId()));
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }

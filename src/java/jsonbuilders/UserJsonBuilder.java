@@ -13,7 +13,8 @@ public class UserJsonBuilder {
         JsonObjectBuilder job = Json.createObjectBuilder();
         job.add("id", user.getId());
         job.add("login", user.getLogin());
-        return job.build();
-               
+        return job.build();         
     }
 }
+
+

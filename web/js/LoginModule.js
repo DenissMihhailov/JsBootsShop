@@ -24,6 +24,7 @@ class LoginModule{
                sessionStorage.setItem('token',JSON.stringify(response.token));
                sessionStorage.setItem('user',JSON.stringify(response.user));
                sessionStorage.setItem('role',JSON.stringify(response.role));
+               sessionStorage.setItem('userId',JSON.stringify(response.userId));
                checkMenuPanel();
                location.reload();
                //document.getElementById('content').innerHTML = "";

@@ -3,7 +3,7 @@ import {home} from './Home.js';
 import {loginModule} from './LoginModule.js';
 import {adminModule} from './AdminModule.js';
 import {listsModule} from './ListsModule.js';
-
+import {profileModule} from './ProfileModule.js';
 
 export{checkMenuPanel};
 
@@ -18,14 +18,17 @@ document.getElementById('catalog').onclick=function(){
     listsModule.getSneakersList();
     toogleMenuActive('catalog');
 }
+
 document.getElementById('admin').onclick=function(){
     adminModule.printAdminChooseFunction();
     toogleMenuActive('admin');
 }
 
-document.getElementById('logOut').onclick=function(){
-    loginModule.sendLogout();
-    toogleMenuActive('logOut');
+document.getElementById('profile').onclick=function(){
+    //loginModule.sendLogout();
+    let id = sessionStorage.getItem('userId');
+    profileModule.getBuyersList(id);
+    toogleMenuActive('profile');
 }
 
 document.getElementById('home').onclick=function(){
@@ -60,8 +63,8 @@ function checkMenuPanel(){
         if(!document.getElementById('admin').classList.contains("d-none")){
             document.getElementById('admin').classList.add("d-none");
         }
-        if(!document.getElementById('logOut').classList.contains("d-none")){
-            document.getElementById('logOut').classList.add("d-none");
+        if(!document.getElementById('profile').classList.contains("d-none")){
+            document.getElementById('profile').classList.add("d-none");
         }
         if(!document.getElementById('logIn').classList.contains("d-none")){
             document.getElementById("logIn").classList.remove("d-none");//Показать вход
@@ -76,8 +79,8 @@ function checkMenuPanel(){
         if(!document.getElementById('admin').classList.contains("d-none")){
             document.getElementById('admin').classList.add("d-none");
         }
-        if(!document.getElementById('logOut').classList.contains("d-none")){
-            document.getElementById('logOut').classList.remove("d-none");
+        if(!document.getElementById('profile').classList.contains("d-none")){
+            document.getElementById('profile').classList.remove("d-none");
         }
         if(!document.getElementById('logIn').classList.contains("d-none")){
             document.getElementById("logIn").classList.add("d-none");//Скрыть вход
@@ -91,8 +94,8 @@ function checkMenuPanel(){
         if(!document.getElementById('admin').classList.contains("d-none")){
             document.getElementById('admin').classList.remove("d-none");
         }
-        if(!document.getElementById('logOut').classList.contains("d-none")){
-            document.getElementById('logOut').classList.remove("d-none");
+        if(!document.getElementById('profile').classList.contains("d-none")){
+            document.getElementById('profile').classList.remove("d-none");
         }
         if(!document.getElementById('logIn').classList.contains("d-none")){
             document.getElementById("logIn").classList.add("d-none");//Показать вход
